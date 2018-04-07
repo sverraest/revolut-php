@@ -307,4 +307,4 @@ $transactions = $client->transactions->all($searchFilters);
 ## About
 
 I'm a big fan of Revolut and I use them both at [Appfleet](https://appfleet.uk) and personally. If you need to build your PHP application on top of the Revolut For Business API this is the library you should use.
-You can follow me on 🐦 [Twitter](https://www.twitter.com/simondoestech) or ✉️ email me at simon[-at-]appfleet.uk
+You can follow me on 🐦 [Twitter](https://www.twitter.com/simondoestech) or ✉️ email me at simon[-at-]appfleet.uk.
