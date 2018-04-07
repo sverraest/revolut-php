@@ -17,7 +17,7 @@ First, install Composer:
 $ curl -sS https://getcomposer.org/installer | php
 ```
 
-Next, install the latest intercom-php:
+Next, install the latest revolut-php:
 
 ```
 $ php composer.phar require sverraest/revolut-php
