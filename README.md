@@ -56,3 +56,233 @@ use RevolutPHP\Client;
 $options = ['headers' => ['foo' => 'bar']];
 $client = new Client('apikey', 'sandbox', $options);
 ```
+
+## Available API Operations
+
+The following exposed API operations from the Revolut For Business API are available using the API Client
+
+💰 __Accounts__
+
+Get all accounts, Get a specific account and get details for a specific account.
+
+🏢 __Counterparties__
+
+Get all counterparties, get a specific counterparty, create a new counterparty and delete a counterparty.
+
+💸 __Payments__
+
+Create and schedule new payments.
+
+🔀 __Transfers__
+
+Create a transfer between your accounts.
+
+📊  __Transactions__
+
+Get all transactions or a subset (with queryFilters), cancel a scheduled transaction, get a specific transaction and get a transaction by the unique specified requestId.
+
+A Transaction is either created as a Payment or a Transfer.
+
+## Usage details
+
+### 💰 Accounts
+#### Get all accounts
+See more at [https://revolutdev.github.io/business-api/#get-accounts](https://revolutdev.github.io/business-api/#get-accounts)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$accounts = $client->accounts->all();
+```
+
+#### Get one account
+See more at [https://revolutdev.github.io/business-api/#get-account](https://revolutdev.github.io/business-api/#get-account)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$account = $client->accounts->get('foo');
+```
+
+#### Get account details
+See more at [https://revolutdev.github.io/business-api/#get-account-details](https://revolutdev.github.io/business-api/#get-account-details)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$account = $client->accounts->getDetails('foo');
+```
+
+### 🏢 Counterparties
+#### Add a Counterparty
+See more at [https://revolutdev.github.io/business-api/#add-revolut-counterparty](https://revolutdev.github.io/business-api/#add-revolut-counterparty) and [https://revolutdev.github.io/business-api/#add-non-revolut-counterparty](https://revolutdev.github.io/business-api/#add-non-revolut-counterparty)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$counterparty = $client->counterparties->create(['profile_type' => 'business', 'name' => 'TestCorp' , 'email' => 'test@sandboxcorp.com']);
+```
+
+#### Delete a Counterparty
+See more at [https://revolutdev.github.io/business-api/#delete-counterparty](https://revolutdev.github.io/business-api/#delete-counterparty)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$client->counterparties->delete('foo');
+```
+
+#### Get all Counterparties
+See more at [https://revolutdev.github.io/business-api/#get-counterparties](https://revolutdev.github.io/business-api/#get-counterparties)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$counterparties = $client->counterparties->all();
+```
+
+#### Get a specific Counterparty
+See more at [https://revolutdev.github.io/business-api/#get-counterparty](https://revolutdev.github.io/business-api/#get-counterparty)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$counterparty = $client->counterparties->get('bar');
+```
+
+### 💸 Payments
+#### Create a payment
+See more at [https://revolutdev.github.io/business-api/#create-payment](https://revolutdev.github.io/business-api/#create-payment)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$payment = [
+  'request_id' => 'e0cbf84637264ee082a848b',
+  'account_id' => 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+  'receiver' => [
+    'counterparty_id': '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+    'account_id': 'db7c73d3-b0df-4e0e-8a9a-f42aa99f52ab'
+  ],
+  'amount' => 123.11,
+  'currency' => 'EUR',
+  'reference' => 'Invoice payment #123'
+];
+
+$payment = $client->payments->create($payment);
+```
+
+#### Schedule a payment (for up to 30 days in the future)
+See more at [https://revolutdev.github.io/business-api/#schedule-payment](https://revolutdev.github.io/business-api/#schedule-payment)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$payment = [
+  'request_id' => 'e0cbf84637264ee082a848b',
+  'account_id' => 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+  'receiver' => [
+    'counterparty_id': '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+    'account_id': 'db7c73d3-b0df-4e0e-8a9a-f42aa99f52ab'
+  ],
+  'amount' => 123.11,
+  'currency' => 'EUR',
+  'reference' => 'Invoice payment #123',
+  'schedule_for' => '2018-04-20',
+];
+
+$payment = $client->payments->create($payment);
+```
+
+### 🔀 Transfers
+#### Transfer money between your accounts
+See more at [https://revolutdev.github.io/business-api/#transfer](https://revolutdev.github.io/business-api/#transfer)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$transfer = [
+  'request_id' => 'e0cbf84637264ee082a848b",
+  'source_account_id' => 'bdab1c20-8d8c-430d-b967-87ac01af060c',
+  'target_account_id' => '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+  'amount' => 123.11,
+  'currency' => 'EUR',
+  'description' => 'Expenses funding'
+];
+
+$transfer = $client->transfers->create($payment);
+```
+
+### 📊 Transactions
+#### Get a specific transaction (Transfer, Payment)
+See more at [https://revolutdev.github.io/business-api/#check-payment-status](https://revolutdev.github.io/business-api/#check-payment-status)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$transaction = $client->transactions->get('foo');
+```
+
+#### Get a specific transaction by requestId (Transfer, Payment)
+You can fetch a transaction by the requestId that you specified on creation.
+See more at [https://revolutdev.github.io/business-api/#check-payment-status](https://revolutdev.github.io/business-api/#check-payment-status)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$transaction = $client->transactions->getByRequestId('inv-123456789');
+```
+
+#### Cancel a scheduled transaction
+See more at [https://revolutdev.github.io/business-api/#cancel-payment](https://revolutdev.github.io/business-api/#cancel-payment)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$client->transactions->cancel('foo');
+```
+
+#### Get all transactions
+See more at [https://revolutdev.github.io/business-api/#get-transactions](https://revolutdev.github.io/business-api/#get-transactions)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+$transactions = $client->transactions->all();
+```
+
+#### Get all transactions with filters applied
+See more at [https://revolutdev.github.io/business-api/#get-transactions](https://revolutdev.github.io/business-api/#get-transactions)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$searchFilters = [
+  'from' => '2018-01-01', 
+  'to' => '2018-04-01', 
+  'count' => 50, 
+  'counterparty' => 'foo', 
+  'type' => 'transfer'
+];
+
+$transactions = $client->transactions->all($searchFilters);
+```
