@@ -5,6 +5,7 @@
 # Dependencies
 composer.phar
 /vendor
+composer.lock
 
 # PhpUnit
 phpunit.phar
