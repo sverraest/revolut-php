@@ -1,0 +1,33 @@
+sudo: false
+
+language: php
+
+php:
+  - 7.0
+  - 7.1
+
+env:
+  matrix:
+    - DEPENDENCIES=--prefer-lowest
+
+matrix:
+  fast_finish: true
+
+cache:
+  directories:
+    - .composer/cache
+
+install:
+  - alias composer=composer\ -n && composer selfupdate
+  - composer validate
+  - composer update $DEPENDENCIES
+
+script:
+  - composer test
+  - composer phpcs
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+notifications:
+  email: false
