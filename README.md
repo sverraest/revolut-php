@@ -240,7 +240,7 @@ use RevolutPHP\Client;
 $client = new Client('apikey');
 
 $transfer = [
-  'request_id' => 'e0cbf84637264ee082a848b",
+  'request_id' => 'e0cbf84637264ee082a848b',
   'source_account_id' => 'bdab1c20-8d8c-430d-b967-87ac01af060c',
   'target_account_id' => '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
   'amount' => 123.11,
