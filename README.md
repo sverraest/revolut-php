@@ -324,7 +324,7 @@ $webhook = [
   'url' => 'https://foo.bar',
 ];
 
-$payment = $client->webhooks->create($webhook);
+$webhook = $client->webhooks->create($webhook);
 ```
 
 ## About
