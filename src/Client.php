@@ -64,6 +64,11 @@ class Client
     public $transactions;
 
     /**
+     * @var Webhooks
+     */
+    public $webhooks;
+
+    /**
      * Client constructor.
      * @param string $apiKey
      * @param string $mode
@@ -83,6 +88,7 @@ class Client
         $this->payments = new Payments($this);
         $this->transfers = new Transfers($this);
         $this->transactions = new Transactions($this);
+        $this->webhooks = new Webhooks($this);
     }
 
     /**

@@ -11,6 +11,8 @@ Using this PHP API Client you can interact with your:
 - 💸 __Payments__
 - 🔀 __Transfers__ 
 - 📊 __Transactions__
+- 🔗 __Webhooks__
+
 
 ## Installation
 
@@ -99,6 +101,10 @@ Create a transfer between your accounts.
 Get all transactions or a subset (with queryFilters), cancel a scheduled transaction, get a specific transaction and get a transaction by the unique specified requestId.
 
 A Transaction is either created as a Payment or a Transfer.
+
+🔗 __Webhooks__
+
+Create new webhooks.
 
 ## Usage details
 
@@ -302,6 +308,22 @@ $searchFilters = [
 ];
 
 $transactions = $client->transactions->all($searchFilters);
+```
+
+### 🔗 Webhooks
+#### Create a webhook
+See more at [https://revolutdev.github.io/business-api/#web-hooks](https://revolutdev.github.io/business-api/#web-hooks)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$webhook = [
+  'url' => 'https://foo.bar',
+];
+
+$payment = $client->webhooks->create($webhook);
 ```
 
 ## About
