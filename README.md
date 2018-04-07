@@ -5,6 +5,13 @@
 
 > (Unofficial) PHP API Client and bindings for the [Revolut Business API](https://revolutdev.github.io/business-api/?shell--sandbox#api-v1-0-introduction).
 
+Using this PHP API Client you can interact with your:
+- 💰 __Accounts__
+- 🏢 __Counterparties__
+- 💸 __Payments__
+- 🔀 __Transfers__ 
+- 📊 __Transactions__
+
 ## Installation
 
 Requires PHP 7.0 or higher
@@ -59,7 +66,9 @@ $client = new Client('apikey', 'sandbox', $options);
 
 ## Available API Operations
 
-The following exposed API operations from the Revolut For Business API are available using the API Client
+The following exposed API operations from the Revolut For Business API are available using the API Client.
+
+See below for more details about each resource.
 
 💰 __Accounts__
 
@@ -286,3 +295,13 @@ $searchFilters = [
 
 $transactions = $client->transactions->all($searchFilters);
 ```
+
+## About
+
+I'm a big fans of Revolut I use them both at [Appfleet](https://appfleet.uk) and personally. If you need to build your PHP application on top of the Revolut For Business API this is the library you should use.
+You can follow me on 🐦 [Twitter](https://www.twitter.com/simondoestech) or ✉️ email me at simon[-at-]appfleet.uk
+
+## Development
+
+- Please create issues for this specific API Binding under the [issues](https://github.com/sverraest/revolut-php/issues) section.
+- [Contact Revolut](https://business.revolut.com/signin) directly for official Revolut For Business API support.
