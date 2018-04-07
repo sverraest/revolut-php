@@ -1,0 +1,11 @@
+# Local
+.DS_Store
+.idea/
+
+# Dependencies
+composer.phar
+/vendor
+
+# PhpUnit
+phpunit.phar
+/phpunit.xml
