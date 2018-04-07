@@ -4,6 +4,7 @@
 
 [![Build Status](https://travis-ci.org/sverraest/revolut-php.svg?branch=master)](https://travis-ci.org/sverraest/revolut-php)
 [![codecov](https://codecov.io/gh/sverraest/revolut-php/branch/master/graph/badge.svg)](https://codecov.io/gh/sverraest/revolut-php)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sverraest/revolut-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sverraest/revolut-php/?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c24e78a43d1134aaf1b4/maintainability)](https://codeclimate.com/github/sverraest/revolut-php/maintainability)
 
 Using this PHP API Client you can interact with your:
