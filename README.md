@@ -36,6 +36,13 @@ Finally, you need to require the library in your PHP application:
 require "vendor/autoload.php";
 ```
 
+## Development
+
+- Run `composer test` and `composer phpcs` before creating a PR to detect any obvious issues.
+- Please create issues for this specific API Binding under the [issues](https://github.com/sverraest/revolut-php/issues) section.
+- [Contact Revolut](https://business.revolut.com/signin) directly for official Revolut For Business API support.
+
+
 ## RevolutPHP\Client
 First get your `production` or `sandbox` API key from [Revolut for Business](https://business.revolut.com/settings/api).
 
@@ -300,8 +307,3 @@ $transactions = $client->transactions->all($searchFilters);
 
 I'm a big fans of Revolut I use them both at [Appfleet](https://appfleet.uk) and personally. If you need to build your PHP application on top of the Revolut For Business API this is the library you should use.
 You can follow me on 🐦 [Twitter](https://www.twitter.com/simondoestech) or ✉️ email me at simon[-at-]appfleet.uk
-
-## Development
-
-- Please create issues for this specific API Binding under the [issues](https://github.com/sverraest/revolut-php/issues) section.
-- [Contact Revolut](https://business.revolut.com/signin) directly for official Revolut For Business API support.
