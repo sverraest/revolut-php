@@ -24,7 +24,7 @@
         }
     ],
     "scripts": {
-        "test": "phpunit",
+        "test": "phpunit -c test",
         "phpcs": "phpcs --standard=PSR2 src/*"
 
     }
