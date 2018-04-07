@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/sverraest/revolut-php.svg?branch=master)](https://travis-ci.org/sverraest/revolut-php)
 [![codecov](https://codecov.io/gh/sverraest/revolut-php/branch/master/graph/badge.svg)](https://codecov.io/gh/sverraest/revolut-php)
 
-## RevolutPHP
+# RevolutPHP
 
 > (Unofficial) PHP API Client and bindings for the [Revolut Business API](https://revolutdev.github.io/business-api/?shell--sandbox#api-v1-0-introduction).
 
@@ -43,6 +43,7 @@ require "vendor/autoload.php";
 - [Contact Revolut](https://business.revolut.com/signin) directly for official Revolut For Business API support.
 
 
+## Quick Start
 ## RevolutPHP\Client
 First get your `production` or `sandbox` API key from [Revolut for Business](https://business.revolut.com/settings/api).
 
