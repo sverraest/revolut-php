@@ -44,7 +44,7 @@ require "vendor/autoload.php";
 
 
 ## Quick Start
-## RevolutPHP\Client
+### RevolutPHP\Client
 First get your `production` or `sandbox` API key from [Revolut for Business](https://business.revolut.com/settings/api).
 
 If you want to get a `production` client:
