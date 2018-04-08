@@ -6,6 +6,9 @@
 [![codecov](https://codecov.io/gh/sverraest/revolut-php/branch/master/graph/badge.svg)](https://codecov.io/gh/sverraest/revolut-php)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sverraest/revolut-php/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sverraest/revolut-php/?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c24e78a43d1134aaf1b4/maintainability)](https://codeclimate.com/github/sverraest/revolut-php/maintainability)
+[![Latest Stable Version](https://poser.pugx.org/sverraest/revolut-php/v/stable)](https://packagist.org/packages/sverraest/revolut-php)
+[![License](https://poser.pugx.org/sverraest/revolut-php/license)](https://packagist.org/packages/sverraest/revolut-php)
+[![composer.lock](https://poser.pugx.org/sverraest/revolut-php/composerlock)](https://packagist.org/packages/sverraest/revolut-php)
 
 Using this PHP API Client you can interact with your:
 - 💰 __Accounts__
