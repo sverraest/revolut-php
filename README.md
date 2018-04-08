@@ -359,3 +359,8 @@ Currently the following errors are defined in the Revolut Business API.
 ## About
 
 You can follow me on 🐦 [Twitter](https://www.twitter.com/simondoestech) or ✉️ email me at simon[-at-]appfleet.uk.
+
+---
+www.appfleet.uk
+
+<img src="https://avatars3.githubusercontent.com/u/25485341?s=200&v=4" width="50"></img>
