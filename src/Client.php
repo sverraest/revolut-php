@@ -144,18 +144,6 @@ class Client
 
     /**
      * @param $endpoint
-     * @param $json
-     * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function put($endpoint, $json)
-    {
-        $response = $this->httpClient->request('PUT', $this->buildBaseUrl().$endpoint, ['json' => $json]);
-        return $this->handleResponse($response);
-    }
-
-    /**
-     * @param $endpoint
      * @return mixed
      */
     public function get($endpoint)
