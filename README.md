@@ -330,6 +330,17 @@ $webhook = [
 
 $webhook = $client->webhooks->create($webhook);
 ```
+
+## Frameworks
+
+If you're looking to use this PHP API Client in a specific PHP framework you currently have the following options:
+
+| Framework                  | Package                                                        |
+| ---------------------------|----------------------------------------------------------------| 
+| Symfony                    | https://github.com/sverraest/revolut-php-bundle                |
+| Laravel                    | Build one and get featured here!                               |
+
+
 ## Errors
 Currently the following errors are defined in the Revolut Business API.
 
