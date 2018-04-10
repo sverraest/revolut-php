@@ -34,7 +34,7 @@ class Transactions
     /**
      * @see https://revolutdev.github.io/business-api/#cancel-payment
      *
-     * @param $id
+     * @param string $id
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

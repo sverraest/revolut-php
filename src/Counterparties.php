@@ -59,7 +59,7 @@ class Counterparties
     /**
      * @see https://revolutdev.github.io/business-api/#delete-counterparty
      *
-     * @param $id
+     * @param string $id
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

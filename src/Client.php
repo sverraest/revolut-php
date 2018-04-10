@@ -131,8 +131,8 @@ class Client
     }
 
     /**
-     * @param $endpoint
-     * @param $json
+     * @param string $endpoint
+     * @param array $json
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -143,7 +143,7 @@ class Client
     }
 
     /**
-     * @param $endpoint
+     * @param string $endpoint
      * @return mixed
      */
     public function get($endpoint)
@@ -153,7 +153,7 @@ class Client
     }
 
     /**
-     * @param $endpoint
+     * @param string $endpoint
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */

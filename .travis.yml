@@ -25,6 +25,7 @@ install:
 script:
   - composer test
   - composer phpcs
+  - composer stan
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
