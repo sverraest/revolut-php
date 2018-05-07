@@ -251,7 +251,7 @@ $transfer = [
   'description' => 'Expenses funding'
 ];
 
-$transfer = $client->transfers->create($payment);
+$transfer = $client->transfers->create($transfer);
 ```
 
 ### 📊 Transactions
