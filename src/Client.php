@@ -64,6 +64,16 @@ class Client
     public $transactions;
 
     /**
+     * @var Rates
+     */
+    public $rates;
+
+    /**
+     * @var Exchanges
+     */
+    public $exchanges;
+
+    /**
      * @var Webhooks
      */
     public $webhooks;
@@ -88,6 +98,8 @@ class Client
         $this->payments = new Payments($this);
         $this->transfers = new Transfers($this);
         $this->transactions = new Transactions($this);
+        $this->rates = new Rates($this);
+        $this->exchanges = new Exchanges($this);
         $this->webhooks = new Webhooks($this);
     }
 

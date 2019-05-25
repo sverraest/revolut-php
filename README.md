@@ -16,6 +16,8 @@ Using this PHP API Client you can interact with your:
 - 💸 __Payments__
 - 🔀 __Transfers__ 
 - 📊 __Transactions__
+- 💹 __Rates__
+- 💱 __Exchanges__
 - 🔗 __Webhooks__
 
 
@@ -106,6 +108,22 @@ Create a transfer between your accounts.
 Get all transactions or a subset (with queryFilters), cancel a scheduled transaction, get a specific transaction and get a transaction by the unique specified requestId.
 
 A Transaction is either created as a Payment or a Transfer.
+
+💹  __Rates__
+
+Get exchange rates.
+
+
+💱  __Exchanges__
+
+There are two ways of using this endpoint:
+
+If you know the amount of currency you want to sell (e.g: I want to exchange 135.5 USD to EUR), then you should specify the amount in the "from" object.
+
+If, on the other hand, you want to specify the amount of currency you want to buy (e.g: I want to exchange USD to receive 200 EUR), then you should specify the amount in the "to" object.
+
+❗ Please note that the "amount" field can be specified only once, either in the "from" object or in the "to" object.
+
 
 🔗 __Webhooks__
 
@@ -313,6 +331,44 @@ $searchFilters = [
 ];
 
 $transactions = $client->transactions->all($searchFilters);
+```
+
+### 💹 Rates
+#### Get exchange rates
+See more at [https://revolutdev.github.io/business-api/#get-exchange-rates](https://revolutdev.github.io/business-api/#get-exchange-rates)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$rates = $client->rates->get('USD', 'EUR', 100);
+```
+
+### 💱 Exchanges
+#### Exchange currency
+See more at [https://revolutdev.github.io/business-api/#exchange-currency](https://revolutdev.github.io/business-api/#exchange-currency)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client('apikey');
+
+$exchange = [
+  'from' => [
+    'account_id' => '7998c061-115a-4779-b7c5-7175c6502ea0',
+    'currency' => 'USD',
+    'amount' => 135.5
+  ],
+  'to' => [
+    'account_id' => '35ba695a-9153-4f68-ac16-b32f228265c9',
+    'currency' => 'EUR'
+  ],
+  'reference' => 'Time to sell',
+  'request_id' => 'e0cbf84637264ee082a848b'
+];
+
+$response = $client->exchanges->exchange($exchange);
 ```
 
 ### 🔗 Webhooks
