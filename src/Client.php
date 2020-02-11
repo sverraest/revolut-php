@@ -4,6 +4,7 @@ namespace RevolutPHP;
 
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7\Response;
+use League\OAuth2\Client\Token\AccessToken;
 use Psr\Http\Message\ResponseInterface;
 
 class Client
@@ -19,9 +20,9 @@ class Client
     private $httpClient;
 
     /**
-     * @var string
+     * @var \League\OAuth2\Client\Token\AccessToken
      */
-    private $apiKey;
+    private $accessToken;
 
     /**
      * @var string
@@ -80,13 +81,13 @@ class Client
 
     /**
      * Client constructor.
-     * @param string $apiKey
+     * @param AccessToken $accessToken
      * @param string $mode
      * @param array $clientOptions
      */
-    public function __construct(string $apiKey, $mode = 'production', array $clientOptions = [])
+    public function __construct(AccessToken $accessToken, $mode = 'production', array $clientOptions = [])
     {
-        $this->apiKey = $apiKey;
+        $this->accessToken = $accessToken;
         $this->mode = $mode;
         $this->baseUrl = ($mode === 'production' ? self::REVOLUT_PRODUCTION_ENDPOINT : self::REVOLUT_SANDBOX_ENDPOINT);
         $this->clientOptions = $clientOptions;
@@ -118,7 +119,7 @@ class Client
     {
         $options = [
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->apiKey,
+                'Authorization' => 'Bearer ' . $this->accessToken->getToken(),
             ]
         ];
 
