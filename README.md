@@ -53,15 +53,50 @@ require "vendor/autoload.php";
 
 
 ## Quick Start
-### RevolutPHP\Client
-First get your `production` or `sandbox` API key from [Revolut for Business](https://business.revolut.com/settings/api).
+### RevolutPHP\Auth\Provider
+Start by following the authentication instructions in the [Revolut API docs](https://revolutdev.github.io/business-api/#revolut-api-authentication):
+```
+openssl genrsa -out privatekey.pem 1024
+openssl req -new -x509 -key privatekey.pem -out publickey.cer -days 1825
+```
 
+Paste the generated public key on the Revolut for Business API settings page, and use the private key to instantiate a new `RevolutPHP\Auth\Provider`:
+```
+$authProvider = new \RevolutPHP\Auth\Provider([
+    'clientId' => '{clientId}', // As shown when uploading your key
+    'privateKey' => 'file://{privateKeyPath}',
+    'redirectUri' => 'https://example.com', // The URL to redirect the user to after the authorisation step 
+    'isSandbox' => true
+]);
+```
+You can now redirect the user to the authorisation flow in the Revolut for Business app:
+```
+$url = $authProvider->getAuthorizationUrl();
+```
+
+Once the user has confirmed authorisation, the user will be redirected back to the redirectUri with an authorisation code attached. You can exchange this authorisation code for an access token:
+```
+$accessToken = $authProvider->getAccessToken('authorization_code', [
+    'code' => $_GET['code']
+]);
+```
+
+You can save this `$accessToken` somewhere safe and pass it directly to the RevolutPHP\Client. The token is valid for 40 minutes. To request a new token after expiration, you can use the refresh token to get a new access token:
+```
+if( $accessToken->hasExpired() ) {
+    $newAccessToken = $authProvider->getAccessToken('refresh_token', [
+        'refresh_token' => $accessToken->getRefreshToken()
+    ]);
+}
+```
+
+### RevolutPHP\Client
 If you want to get a `production` client:
 
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 ```
 
 If you want to get a `sandbox` client:
@@ -69,7 +104,7 @@ If you want to get a `sandbox` client:
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey', 'sandbox');
+$client = new Client($accessToken, 'sandbox');
 ```
 
 If you want to pass additional [GuzzleHTTP](https://github.com/guzzle/guzzle) options:
@@ -78,7 +113,7 @@ If you want to pass additional [GuzzleHTTP](https://github.com/guzzle/guzzle) op
 use RevolutPHP\Client;
 
 $options = ['headers' => ['foo' => 'bar']];
-$client = new Client('apikey', 'sandbox', $options);
+$client = new Client($accessToken, 'sandbox', $options);
 ```
 
 ## Available API Operations
@@ -138,7 +173,7 @@ See more at [https://revolutdev.github.io/business-api/#get-accounts](https://re
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $accounts = $client->accounts->all();
 ```
 
@@ -148,7 +183,7 @@ See more at [https://revolutdev.github.io/business-api/#get-account](https://rev
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $account = $client->accounts->get('foo');
 ```
 
@@ -158,7 +193,7 @@ See more at [https://revolutdev.github.io/business-api/#get-account-details](htt
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $account = $client->accounts->getDetails('foo');
 ```
 
@@ -169,7 +204,7 @@ See more at [https://revolutdev.github.io/business-api/#add-revolut-counterparty
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $counterparty = $client->counterparties->create(['profile_type' => 'business', 'name' => 'TestCorp' , 'email' => 'test@sandboxcorp.com']);
 ```
 
@@ -179,7 +214,7 @@ See more at [https://revolutdev.github.io/business-api/#delete-counterparty](htt
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $client->counterparties->delete('foo');
 ```
 
@@ -189,7 +224,7 @@ See more at [https://revolutdev.github.io/business-api/#get-counterparties](http
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $counterparties = $client->counterparties->all();
 ```
 
@@ -199,7 +234,7 @@ See more at [https://revolutdev.github.io/business-api/#get-counterparty](https:
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $counterparty = $client->counterparties->get('bar');
 ```
 
@@ -210,7 +245,7 @@ See more at [https://revolutdev.github.io/business-api/#create-payment](https://
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $payment = [
   'request_id' => 'e0cbf84637264ee082a848b',
@@ -233,7 +268,7 @@ See more at [https://revolutdev.github.io/business-api/#schedule-payment](https:
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $payment = [
   'request_id' => 'e0cbf84637264ee082a848b',
@@ -258,7 +293,7 @@ See more at [https://revolutdev.github.io/business-api/#transfer](https://revolu
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $transfer = [
   'request_id' => 'e0cbf84637264ee082a848b',
@@ -279,7 +314,7 @@ See more at [https://revolutdev.github.io/business-api/#check-payment-status](ht
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $transaction = $client->transactions->get('foo');
 ```
 
@@ -290,7 +325,7 @@ See more at [https://revolutdev.github.io/business-api/#check-payment-status](ht
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $transaction = $client->transactions->getByRequestId('inv-123456789');
 ```
 
@@ -300,7 +335,7 @@ See more at [https://revolutdev.github.io/business-api/#cancel-payment](https://
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $client->transactions->cancel('foo');
 ```
 
@@ -310,7 +345,7 @@ See more at [https://revolutdev.github.io/business-api/#get-transactions](https:
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 $transactions = $client->transactions->all();
 ```
 
@@ -320,7 +355,7 @@ See more at [https://revolutdev.github.io/business-api/#get-transactions](https:
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $searchFilters = [
   'from' => '2018-01-01', 
@@ -340,7 +375,7 @@ See more at [https://revolutdev.github.io/business-api/#get-exchange-rates](http
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $rates = $client->rates->get('USD', 'EUR', 100);
 ```
@@ -352,7 +387,7 @@ See more at [https://revolutdev.github.io/business-api/#exchange-currency](https
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $exchange = [
   'from' => [
@@ -378,7 +413,7 @@ See more at [https://revolutdev.github.io/business-api/#web-hooks](https://revol
 ```php
 use RevolutPHP\Client;
 
-$client = new Client('apikey');
+$client = new Client($accessToken);
 
 $webhook = [
   'url' => 'https://foo.bar',

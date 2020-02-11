@@ -8,16 +8,23 @@ use GuzzleHttp\Middleware;
 
 class ClientTest extends PHPUnit_Framework_TestCase
 {
+    private function accessTokenMock()
+    {
+        return new \League\OAuth2\Client\Token\AccessToken([
+            'access_token' => 'mock'
+        ]);
+    }
+    
     public function testClientEndpoint()
     {
-        $client = new RevolutPHP\Client('foo');
+        $client = new RevolutPHP\Client($this->accessTokenMock());
 
         $this->assertEquals(
             $client::REVOLUT_PRODUCTION_ENDPOINT,
             PHPUnit_Framework_Assert::readAttribute($client, "baseUrl")
         );
 
-        $client = new RevolutPHP\Client('foo', 'sandbox');
+        $client = new RevolutPHP\Client($this->accessTokenMock(), 'sandbox');
 
         $this->assertEquals(
             $client::REVOLUT_SANDBOX_ENDPOINT,
@@ -34,7 +41,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $stack = HandlerStack::create($mock);
         $stack->push($history);
         $http_client = new Client(['handler' => $stack]);
-        $client = new RevolutPHP\Client('foo' , 'production');
+        $client = new RevolutPHP\Client($this->accessTokenMock() , 'production');
         $client->setClient($http_client);
 
         $client->accounts->all();
@@ -52,7 +59,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $stack = HandlerStack::create($mock);
         $stack->push($history);
         $http_client = new Client(['handler' => $stack]);
-        $client = new RevolutPHP\Client('foo' , 'production');
+        $client = new RevolutPHP\Client($this->accessTokenMock(), 'production');
         $client->setClient($http_client);
 
         $client->accounts->get('foo');
@@ -70,7 +77,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $stack = HandlerStack::create($mock);
         $stack->push($history);
         $http_client = new Client(['handler' => $stack]);
-        $client = new RevolutPHP\Client('foo' , 'production');
+        $client = new RevolutPHP\Client($this->accessTokenMock(), 'production');
         $client->setClient($http_client);
 
         $client->counterparties->create(['foo' => 'bar']);
@@ -88,7 +95,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $stack = HandlerStack::create($mock);
         $stack->push($history);
         $http_client = new Client(['handler' => $stack]);
-        $client = new RevolutPHP\Client('foo' , 'production');
+        $client = new RevolutPHP\Client($this->accessTokenMock(), 'production');
         $client->setClient($http_client);
 
         $client->counterparties->delete('foo');
