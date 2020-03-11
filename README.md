@@ -14,6 +14,7 @@ Using this PHP API Client you can interact with your:
 - 💰 __Accounts__
 - 🏢 __Counterparties__
 - 💸 __Payments__
+- 🕰️ __Payment Drafts__
 - 🔀 __Transfers__ 
 - 📊 __Transactions__
 - 💹 __Rates__
@@ -133,6 +134,10 @@ Get all counterparties, get a specific counterparty, create a new counterparty a
 💸 __Payments__
 
 Create and schedule new payments.
+
+🕰️ __Payment Drafts__
+
+Create, get and delete payment drafts for approval by a business owner/admin.
 
 🔀 __Transfers__
 
@@ -284,6 +289,63 @@ $payment = [
 ];
 
 $payment = $client->payments->create($payment);
+```
+
+### 🕰️ Payment Drafts
+#### Get all Payment Drafts
+See more at [https://revolut-engineering.github.io/api-docs/#business-api-get-payment-drafts](https://revolut-engineering.github.io/api-docs/#business-api-get-payment-drafts)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client($accessToken);
+$paymentDrafts = $client->paymentDrafts->all();
+```
+
+#### Get a specific Payment Draft
+See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-get-payment-draft-by-id](https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-get-payment-draft-by-id)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client($accessToken);
+$counterparty = $client->paymentDrafts->get('bar');
+```
+
+#### Create a Payment Draft
+See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payment-drafts-create-a-payment-draft](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payment-drafts-create-a-payment-draft)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client($accessToken);
+
+$draft = [
+  'title' => 'Title of payment',
+  'schedule_for' => '2017-10-10',
+  'payments' => [[
+    'currency' => 'EUR',
+    'amount' => 123,
+    'account_id' => 'db7c73d3-b0df-4e0e-8a9a-f42aa99f52ab',
+    'receiver' => [
+      'counterparty_id' => '5138z40d1-05bb-49c0-b130-75e8cf2f7693',
+      'account_id' => 'bdab1c20-8d8c-430d-b967-87ac01af060c'
+    ],
+    'reference' => 'External transfer'
+  ]]
+];
+
+$draft = $client->paymentDrafts->create($draft);
+```
+
+#### Delete a payment draft
+See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-delete-payment-draft](https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-delete-payment-draft)
+
+```php
+use RevolutPHP\Client;
+
+$client = new Client($accessToken);
+$client->paymentDrafts->delete('bar');
 ```
 
 ### 🔀 Transfers
