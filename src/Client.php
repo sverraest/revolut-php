@@ -60,6 +60,11 @@ class Client
     public $payments;
 
     /**
+     * @var PaymentDrafts
+     */
+    public $paymentDrafts;
+
+    /**
      * @var Transactions
      */
     public $transactions;
@@ -97,6 +102,7 @@ class Client
         $this->accounts = new Accounts($this);
         $this->counterparties = new Counterparties($this);
         $this->payments = new Payments($this);
+        $this->paymentDrafts = new PaymentDrafts($this);
         $this->transfers = new Transfers($this);
         $this->transactions = new Transactions($this);
         $this->rates = new Rates($this);
@@ -158,6 +164,7 @@ class Client
     /**
      * @param string $endpoint
      * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function get($endpoint)
     {
