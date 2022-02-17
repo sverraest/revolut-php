@@ -143,7 +143,7 @@ class Client
      */
     private function handleResponse(Response $response)
     {
-        $stream = \GuzzleHttp\Psr7\stream_for($response->getBody());
+        $stream = $response->getBody();
         $data = json_decode($stream);
 
         return $data;
