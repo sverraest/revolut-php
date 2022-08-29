@@ -163,6 +163,18 @@ class Client
 
     /**
      * @param string $endpoint
+     * @param array $json
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function patch($endpoint, $json)
+    {
+        $response = $this->httpClient->request('PATCH', $this->buildBaseUrl().$endpoint, ['json' => $json]);
+        return $this->handleResponse($response);
+    }
+
+    /**
+     * @param string $endpoint
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
