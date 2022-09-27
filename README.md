@@ -1,6 +1,6 @@
 # RevolutPHP
 
-> (Unofficial) PHP API Client and bindings for the [Revolut Business API](https://revolut-engineering.github.io/api-docs/).
+> (Unofficial) PHP API Client and bindings for the [Revolut Business API](https://developer.revolut.com/docs/manage-accounts/#getting-started).
 
 [![Build Status](https://travis-ci.org/sverraest/revolut-php.svg?branch=master)](https://travis-ci.org/sverraest/revolut-php)
 [![codecov](https://codecov.io/gh/sverraest/revolut-php/branch/master/graph/badge.svg)](https://codecov.io/gh/sverraest/revolut-php)
@@ -20,6 +20,8 @@ Using this PHP API Client you can interact with your:
 - 💹 __Rates__
 - 💱 __Exchanges__
 - 🔗 __Webhooks__
+
+Revolut Business API does not support - 🧾 __Invoices__
 
 
 ## Installation
@@ -55,7 +57,7 @@ require "vendor/autoload.php";
 
 ## Quick Start
 ### RevolutPHP\Auth\Provider
-Start by following the authentication instructions in the [Revolut API docs](https://revolut-engineering.github.io/api-docs/#business-api-authentication):
+Start by following the authentication instructions in the [Revolut API docs](https://developer.revolut.com/docs/api-reference/business/):
 ```
 openssl genrsa -out privatekey.pem 1024
 openssl req -new -x509 -key privatekey.pem -out publickey.cer -days 1825
@@ -173,7 +175,7 @@ Create new webhooks.
 
 ### 💰 Accounts
 #### Get all accounts
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-accounts](https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-accounts)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Accounts](https://developer.revolut.com/docs/api-reference/business/#tag/Accounts)
 
 ```php
 use RevolutPHP\Client;
@@ -183,7 +185,7 @@ $accounts = $client->accounts->all();
 ```
 
 #### Get one account
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-account](https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-account)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Accounts/operation/getAccount](https://developer.revolut.com/docs/api-reference/business/#tag/Accounts/operation/getAccount)
 
 ```php
 use RevolutPHP\Client;
@@ -193,7 +195,7 @@ $account = $client->accounts->get('foo');
 ```
 
 #### Get account details
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-account-details](https://revolut-engineering.github.io/api-docs/#business-api-business-api-accounts-get-account-details)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Accounts/operation/getAccountDetails](https://developer.revolut.com/docs/api-reference/business/#tag/Accounts/operation/getAccountDetails)
 
 ```php
 use RevolutPHP\Client;
@@ -204,7 +206,7 @@ $account = $client->accounts->getDetails('foo');
 
 ### 🏢 Counterparties
 #### Add a Counterparty
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-add-revolut-counterparty](https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-add-revolut-counterparty)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/addCounterparty](https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/addCounterparty)
 
 ```php
 use RevolutPHP\Client;
@@ -214,7 +216,7 @@ $counterparty = $client->counterparties->create(['profile_type' => 'business', '
 ```
 
 #### Delete a Counterparty
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-delete-counterparty](https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-delete-counterparty)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/deleteCounterparty](https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/deleteCounterparty)
 
 ```php
 use RevolutPHP\Client;
@@ -224,7 +226,7 @@ $client->counterparties->delete('foo');
 ```
 
 #### Get all Counterparties
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-get-counterparties](https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-get-counterparties)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/getCounterparties](https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/getCounterparties)
 
 ```php
 use RevolutPHP\Client;
@@ -234,7 +236,7 @@ $counterparties = $client->counterparties->all();
 ```
 
 #### Get a specific Counterparty
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-get-counterparty](https://revolut-engineering.github.io/api-docs/#business-api-business-api-counterparties-get-counterparty)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/getCounterparty](https://developer.revolut.com/docs/api-reference/business/#tag/Counterparties/operation/getCounterparty)
 
 ```php
 use RevolutPHP\Client;
@@ -245,7 +247,7 @@ $counterparty = $client->counterparties->get('bar');
 
 ### 💸 Payments
 #### Create a payment
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-create-payment](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-create-payment)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/createPayment](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/createPayment)
 
 ```php
 use RevolutPHP\Client;
@@ -268,7 +270,7 @@ $payment = $client->payments->create($payment);
 ```
 
 #### Schedule a payment (for up to 30 days in the future)
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-schedule-payment](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-schedule-payment)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/createPayment](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/createPayment)
 
 ```php
 use RevolutPHP\Client;
@@ -293,7 +295,7 @@ $payment = $client->payments->create($payment);
 
 ### 🕰️ Payment Drafts
 #### Get all Payment Drafts
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-get-payment-drafts](https://revolut-engineering.github.io/api-docs/#business-api-get-payment-drafts)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/getPaymentDrafts](https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/getPaymentDrafts)
 
 ```php
 use RevolutPHP\Client;
@@ -303,7 +305,7 @@ $paymentDrafts = $client->paymentDrafts->all();
 ```
 
 #### Get a specific Payment Draft
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-get-payment-draft-by-id](https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-get-payment-draft-by-id)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/getPaymentDraft](https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/getPaymentDraft)
 
 ```php
 use RevolutPHP\Client;
@@ -313,7 +315,7 @@ $counterparty = $client->paymentDrafts->get('bar');
 ```
 
 #### Create a Payment Draft
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payment-drafts-create-a-payment-draft](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payment-drafts-create-a-payment-draft)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/createPaymentDraft](https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/createPaymentDraft)
 
 ```php
 use RevolutPHP\Client;
@@ -339,7 +341,7 @@ $draft = $client->paymentDrafts->create($draft);
 ```
 
 #### Delete a payment draft
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-delete-payment-draft](https://revolut-engineering.github.io/api-docs/#business-api-business-api-get-payment-drafts-delete-payment-draft)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/deletePaymentDraft](https://developer.revolut.com/docs/api-reference/business/#tag/Payment-Drafts/operation/deletePaymentDraft)
 
 ```php
 use RevolutPHP\Client;
@@ -350,7 +352,7 @@ $client->paymentDrafts->delete('bar');
 
 ### 🔀 Transfers
 #### Transfer money between your accounts
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-transfers-create-transfer](https://revolut-engineering.github.io/api-docs/#business-api-business-api-transfers-create-transfer)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Transfers/operation/createTransfer](https://developer.revolut.com/docs/api-reference/business/#tag/Transfers/operation/createTransfer)
 
 ```php
 use RevolutPHP\Client;
@@ -371,7 +373,7 @@ $transfer = $client->transfers->create($transfer);
 
 ### 📊 Transactions
 #### Get a specific transaction (Transfer, Payment)
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transaction](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transaction)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransaction](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransaction)
 
 ```php
 use RevolutPHP\Client;
@@ -382,7 +384,7 @@ $transaction = $client->transactions->get('foo');
 
 #### Get a specific transaction by requestId (Transfer, Payment)
 You can fetch a transaction by the requestId that you specified on creation.
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transaction](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transaction)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransaction](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransaction)
 
 ```php
 use RevolutPHP\Client;
@@ -392,7 +394,7 @@ $transaction = $client->transactions->getByRequestId('inv-123456789');
 ```
 
 #### Cancel a scheduled transaction
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-cancel-payment](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-cancel-payment)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/cancelTransaction](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/cancelTransaction)
 
 ```php
 use RevolutPHP\Client;
@@ -402,7 +404,7 @@ $client->transactions->cancel('foo');
 ```
 
 #### Get all transactions
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transactions](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transactions)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransactions](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransactions)
 
 ```php
 use RevolutPHP\Client;
@@ -412,7 +414,9 @@ $transactions = $client->transactions->all();
 ```
 
 #### Get all transactions with filters applied
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transactions](https://revolut-engineering.github.io/api-docs/#business-api-business-api-payments-get-transactions)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransactions](https://developer.revolut.com/docs/api-reference/business/#tag/Payments/operation/getTransactions)
+
+Default 'count' is 100 if you want to retreive more transactions even with dates selected you should specify bigger 'count'. Highiest value of 'count' is 1000.
 
 ```php
 use RevolutPHP\Client;
@@ -432,7 +436,7 @@ $transactions = $client->transactions->all($searchFilters);
 
 ### 💹 Rates
 #### Get exchange rates
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-exchanges-get-exchange-rates](https://revolut-engineering.github.io/api-docs/#business-api-business-api-exchanges-get-exchange-rates)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Exchanges](https://developer.revolut.com/docs/api-reference/business/#tag/Exchanges)
 
 ```php
 use RevolutPHP\Client;
@@ -444,7 +448,7 @@ $rates = $client->rates->get('USD', 'EUR', 100);
 
 ### 💱 Exchanges
 #### Exchange currency
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-business-api-exchanges-exchange-currency](https://revolut-engineering.github.io/api-docs/#business-api-business-api-exchanges-exchange-currency)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Exchanges/operation/exchangeMoney](https://developer.revolut.com/docs/api-reference/business/#tag/Exchanges/operation/exchangeMoney)
 
 ```php
 use RevolutPHP\Client;
@@ -470,7 +474,7 @@ $response = $client->exchanges->exchange($exchange);
 
 ### 🔗 Webhooks
 #### Create a webhook
-See more at [https://revolut-engineering.github.io/api-docs/#business-api-web-hooks](https://revolut-engineering.github.io/api-docs/#business-api-web-hooks)
+See more at [https://developer.revolut.com/docs/api-reference/business/#tag/Webhooks/operation/setupWebhook](https://developer.revolut.com/docs/api-reference/business/#tag/Webhooks/operation/setupWebhook)
 
 ```php
 use RevolutPHP\Client;
