@@ -59,8 +59,8 @@ require "vendor/autoload.php";
 ### RevolutPHP\Auth\Provider
 Start by following the authentication instructions in the [Revolut API docs](https://developer.revolut.com/docs/api-reference/business/):
 ```
-openssl genrsa -out privatekey.pem 1024
-openssl req -new -x509 -key privatekey.pem -out publickey.cer -days 1825
+openssl genrsa -out privatecert.pem 2048
+openssl req -new -x509 -key privatecert.pem -out publiccert.cer -days 1825
 ```
 
 Paste the generated public key on the Revolut for Business API settings page, and use the private key to instantiate a new `RevolutPHP\Auth\Provider`:
