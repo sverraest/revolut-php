@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Transfers
 {
-    const ENDPOINT = 'transfer';
+    const ENDPOINT = '1.0/transfer';
 
     /**
      * @var Client

@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Payments
 {
-    const ENDPOINT = 'pay';
+    const ENDPOINT = '1.0/pay';
 
     /**
      * @var Client

@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Exchanges
 {
-    const ENDPOINT = 'exchange';
+    const ENDPOINT = '1.0/exchange';
 
     /**
      * @var Client

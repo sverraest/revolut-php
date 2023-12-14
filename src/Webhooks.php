@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Webhooks
 {
-    const ENDPOINT = 'webhook';
+    const ENDPOINT = '1.0/webhook';
 
     /**
      * @var Client

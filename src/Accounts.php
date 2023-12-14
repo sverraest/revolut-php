@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Accounts
 {
-    const ENDPOINT = 'accounts';
+    const ENDPOINT = '1.0/accounts';
 
     /**
      * @var Client

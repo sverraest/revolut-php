@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class WebhooksV2
 {
-    const ENDPOINT = 'webhooks';
+    const ENDPOINT = '2.0/webhooks';
 
     /**
      * @var Client
@@ -18,7 +18,6 @@ class WebhooksV2
     public function __construct(Client $client)
     {
         $this->client = $client;
-        $this->client->setApiVersion(ApiVersion::V2());
     }
 
     /**
