@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Counterparties
 {
-    const ENDPOINT = 'counterparty';
+    const ENDPOINT = '1.0/counterparty';
 
     /**
      * @var Client

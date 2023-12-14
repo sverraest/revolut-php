@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Rates
 {
-    const ENDPOINT = 'rate';
+    const ENDPOINT = '1.0/rate';
 
     /**
      * @var Client

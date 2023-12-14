@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class Transactions
 {
-    const ENDPOINT = 'transaction';
+    const ENDPOINT = '1.0/transaction';
 
     /**
      * @var Client

@@ -4,7 +4,7 @@ namespace RevolutPHP;
 
 class PaymentDrafts
 {
-    const ENDPOINT = 'payment-drafts';
+    const ENDPOINT = '1.0/payment-drafts';
 
     /**
      * @var Client
