@@ -108,7 +108,7 @@ class WebhooksV2
         if (null !== $limit) {
             $args['limit'] = $limit;
         }
-        if (null !== $limit) {
+        if (null !== $createdBefore) {
             $args['created_before'] = $createdBefore->format(\DateTime::ISO8601);
         }
 
