@@ -10,9 +10,13 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
 
-    const REVOLUT_API_VERSION = '1.0';
     const REVOLUT_SANDBOX_ENDPOINT = 'https://sandbox-b2b.revolut.com/api/';
     const REVOLUT_PRODUCTION_ENDPOINT = 'https://b2b.revolut.com/api/';
+
+    /**
+     * @var ApiVersion
+     */
+    private $apiVersion;
 
     /**
      * @var \GuzzleHttp\Client
@@ -85,6 +89,11 @@ class Client
     public $webhooks;
 
     /**
+     * @var WebhooksV2
+     */
+    public $webhooksV2;
+
+    /**
      * Client constructor.
      * @param AccessToken $accessToken
      * @param string $mode
@@ -92,6 +101,7 @@ class Client
      */
     public function __construct(AccessToken $accessToken, $mode = 'production', array $clientOptions = [])
     {
+        $this->apiVersion = ApiVersion::V1();
         $this->accessToken = $accessToken;
         $this->mode = $mode;
         $this->baseUrl = ($mode === 'production' ? self::REVOLUT_PRODUCTION_ENDPOINT : self::REVOLUT_SANDBOX_ENDPOINT);
@@ -108,6 +118,12 @@ class Client
         $this->rates = new Rates($this);
         $this->exchanges = new Exchanges($this);
         $this->webhooks = new Webhooks($this);
+        $this->webhooksV2 = new WebhooksV2($this);
+    }
+
+    public function setApiVersion(ApiVersion $version)
+    {
+        $this->apiVersion = $version;
     }
 
     /**
@@ -125,8 +141,8 @@ class Client
     {
         $options = [
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->accessToken->getToken(),
-            ]
+                'Authorization' => 'Bearer '.$this->accessToken->getToken(),
+            ],
         ];
 
         $this->httpClient = new GuzzleClient(array_replace_recursive($this->clientOptions, $options));
@@ -134,7 +150,7 @@ class Client
 
     private function buildBaseUrl()
     {
-        return $this->baseUrl.self::REVOLUT_API_VERSION.'/';
+        return $this->baseUrl.$this->apiVersion->getValue().'/';
     }
 
     /**
@@ -158,6 +174,7 @@ class Client
     public function post($endpoint, $json)
     {
         $response = $this->httpClient->request('POST', $this->buildBaseUrl().$endpoint, ['json' => $json]);
+
         return $this->handleResponse($response);
     }
 
@@ -170,6 +187,7 @@ class Client
     public function patch($endpoint, $json)
     {
         $response = $this->httpClient->request('PATCH', $this->buildBaseUrl().$endpoint, ['json' => $json]);
+
         return $this->handleResponse($response);
     }
 
@@ -181,6 +199,7 @@ class Client
     public function get($endpoint)
     {
         $response = $this->httpClient->request('GET', $this->buildBaseUrl().$endpoint);
+
         return $this->handleResponse($response);
     }
 
@@ -192,6 +211,7 @@ class Client
     public function delete($endpoint)
     {
         $response = $this->httpClient->request('DELETE', $this->buildBaseUrl().$endpoint);
+
         return $this->handleResponse($response);
     }
 }
